@@ -1,8 +1,7 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-
-import {useSelector, useDispatch} from 'react-redux';
-import {increment, decrement} from '../../redux/reducers/countReducer';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { increment, decrement } from '../../redux/reducers/countReducer';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -22,7 +21,7 @@ const Home = () => {
 
       <TouchableOpacity
         onPress={() => dispatch(decrement())}
-        style={{...styles.btn, backgroundColor: '#6e3b3b'}}>
+        style={{ ...styles.btn, backgroundColor: '#6e3b3b' }}>
         <Text style={styles.btn_text}> Decrement </Text>
       </TouchableOpacity>
     </View>

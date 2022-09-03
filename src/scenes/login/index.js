@@ -1,26 +1,19 @@
-// import React from 'react';
-// import {SafeAreaView, Text, TouchableHighlight} from 'react-native';
-
-// const LoginScreen = ({navigation}) => (
-//   <SafeAreaView>
-//     <Text>Screen: Login</Text>
-
-//     <TouchableHighlight onPress={() => navigation.navigate('Home')}>
-//       <Text>Go to home</Text>
-//     </TouchableHighlight>
-//   </SafeAreaView>
-// );
-
-// export default LoginScreen;
-
-import React, {useEffect} from 'react';
-import {StyleSheet, View, Text, ActivityIndicator, Button} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {fetchUsers} from '../../redux/reducers/usersSlice';
+import React, { useEffect } from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ActivityIndicator,
+  Button,
+} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUsers } from '../../redux/reducers/usersSlice';
+import { HelloWorld } from '../../components/atoms';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const {users, loading} = useSelector(state => state.users);
+  const { users, loading } = useSelector(state => state.users);
+  const count = useSelector(state => state.counter.value);
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -48,6 +41,10 @@ const Login = () => {
           </View>
         );
       })}
+      <View>
+        <HelloWorld />
+        <Text>{count}</Text>
+      </View>
     </View>
   );
 };
