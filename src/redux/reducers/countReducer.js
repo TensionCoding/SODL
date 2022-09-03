@@ -1,23 +1,24 @@
-import {combineReducers} from 'redux';
-import {COUNT_INCREASE, COUNT_DECREASE} from '../types';
+import {createSlice} from '@reduxjs/toolkit';
 
-const INITIAL_STATE = {
-  count: 0,
+const initialState = {
+  value: 0,
 };
 
-export default (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case COUNT_INCREASE:
-      return {
-        ...state,
-        count: state.count + 1,
-      };
-    case COUNT_DECREASE:
-      return {
-        ...state,
-        count: state.count - 1,
-      };
-    default:
-      return state;
-  }
-};
+export const counterSlice = createSlice({
+  name: 'counter',
+  initialState,
+  reducers: {
+    increment: state => {
+      state.value += 1;
+    },
+    decrement: state => {
+      state.value -= 1;
+    },
+    incrementByAmount: (state, action) => {
+      state.value += action.payload;
+    },
+  },
+});
+
+export const {increment, decrement, incrementByAmount} = counterSlice.actions;
+export default counterSlice.reducer;

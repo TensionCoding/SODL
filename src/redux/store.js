@@ -1,8 +1,10 @@
-import {createStore, combineReducers} from 'redux';
-import CountReducer from './reducers/countReducer';
+import {configureStore} from '@reduxjs/toolkit';
+import counterReducer from './reducers/countReducer';
+import usersReducer from './reducers/usersSlice';
 
-const rootReducer = combineReducers({
-  count: CountReducer,
+export const store = configureStore({
+  reducer: {
+    counter: counterReducer,
+    users: usersReducer,
+  },
 });
-
-export const store = createStore(rootReducer);

@@ -2,30 +2,26 @@ import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
 import {useSelector, useDispatch} from 'react-redux';
-import {increment, decrement} from '../../redux/actions/countAction';
+import {increment, decrement} from '../../redux/reducers/countReducer';
 
 const Home = () => {
   const dispatch = useDispatch();
 
-  const count = useSelector(store => store.count.count);
-  const handleIncrement = () => {
-    dispatch(increment());
-  };
+  const count = useSelector(store => store.counter.value);
 
-  const handleDecrement = () => {
-    dispatch(decrement());
-  };
   return (
     <View style={styles.container}>
       <Text style={styles.title_text}>Counter App</Text>
       <Text style={styles.counter_text}>{count}</Text>
 
-      <TouchableOpacity onPress={handleIncrement} style={styles.btn}>
+      <TouchableOpacity
+        onPress={() => dispatch(increment())}
+        style={styles.btn}>
         <Text style={styles.btn_text}> Increment </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={handleDecrement}
+        onPress={() => dispatch(decrement())}
         style={{...styles.btn, backgroundColor: '#6e3b3b'}}>
         <Text style={styles.btn_text}> Decrement </Text>
       </TouchableOpacity>
