@@ -1,13 +1,14 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import {HelloWorld} from '_atoms';
+import Home from '_scenes/home/index.js';
+import {Provider} from 'react-redux';
+import {store} from './redux/store';
+// import Navigator from '_navigations';
 
 const App = () => {
   return (
-    <View>
-      {/* <Text>'Hello World'</Text> */}
-      <HelloWorld name={'yo'}></HelloWorld>
-    </View>
+    <Provider store={store}>
+      <Home />
+    </Provider>
   );
 };
 
