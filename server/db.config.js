@@ -10,15 +10,15 @@ mongoose.connect(mongoURI, {
 });
 
 const userSchema = new Schema({
-  username: {type: String, required: true, unique: true},
-  password: {type: String, required: true},
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
   trips: [
     {
-      date: {type: String},
-      time: {type: String},
-      odo: {type: Number},
-      start: {type: String},
-      end: {type: String},
+      date: { type: String },
+      time: { type: String },
+      odo: { type: Number },
+      start: { type: String },
+      end: { type: String },
     },
   ],
 });
