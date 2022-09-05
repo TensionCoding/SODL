@@ -1,18 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   View,
   Text,
   ActivityIndicator,
+  Image,
   Button,
+  useWindowDimensions,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers } from '../../redux/reducers/usersSlice';
+// import Logo from '../../assets/images/ADD.png';
+import { fetchUsers, selectAllUsers } from '../../redux/reducers/usersSlice';
 import { HelloWorld } from '../../components/atoms';
+// import { useGetTripsQuery } from '../../redux/api/apiSlice';
 
 const Login = () => {
+  const { height } = useWindowDimensions();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const { users, loading } = useSelector(state => state.users);
+  const { loading } = useSelector(state => state.users);
+  const users = useSelector(selectAllUsers);
   const count = useSelector(state => state.counter.value);
 
   useEffect(() => {
