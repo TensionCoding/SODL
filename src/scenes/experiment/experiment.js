@@ -7,10 +7,14 @@ import {
   Button,
   ScrollView,
 } from 'react-native';
+import { useSelector } from 'react-redux';
 import { useFetchUsersQuery } from '../../redux/api/apiSlice';
+import { selectUser } from '../../redux/reducers/userSlice';
 import TripDisplay from '../../components/molecules/TripDisplay';
 
 const Experiment = () => {
+  const user = useSelector(selectUser);
+  console.log('here is the user from Login-->', user);
   // const {
   //   data: users,
   //   isLoading,

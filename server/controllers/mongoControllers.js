@@ -3,15 +3,15 @@ const mongoose = require('mongoose');
 const dbController = {};
 
 dbController.createUser = (req, res, next) => {
-  const {username, password} = req.body;
+  const { username, password } = req.body;
   //update this response for error handling
   //I dont like this catch at all
   if (!username || !password) {
-    return res.send({express: 'ENTER VALID CREDENTIALS'});
+    return res.send({ express: 'ENTER VALID CREDENTIALS' });
   }
-  models.create({username, password}, (err, user) => {
+  models.create({ username, password }, (err, user) => {
     if (err) {
-      return res.send({express: 'ERROR OCCURED IN CREATE'});
+      return res.send({ express: 'ERROR OCCURED IN CREATE' });
     } else {
       res.locals.username = user.username;
       next();
@@ -21,10 +21,10 @@ dbController.createUser = (req, res, next) => {
 
 dbController.verifyUser = (req, res, next) => {
   console.log('in verify User middleware');
-  const {username, password} = req.body;
-  models.findOne({username}, (err, user) => {
+  const { username, password } = req.body;
+  models.findOne({ username }, (err, user) => {
     if (err) {
-      return next('Error in userController.verifyUser: ' + JSON. stringify(err));
+      return next('Error in userController.verifyUser: ' + JSON.stringify(err));
     } else if (!user) {
       res.locals.verify = 'false';
       return next();
@@ -54,7 +54,11 @@ dbController.getTrips = (req, res, next) => {
 dbController.addTrip = (req, res, next) => {
   const newTrip = req.body;
   const userID = req.params.id;
-  models.findOneAndUpdate({username: userID}, {'$push': { trips : newTrip }}, {new: true}, (err, trip) => {
+  models.findOneAndUpdate(
+    { username: userID },
+    { $push: { trips: newTrip } },
+    { new: true },
+    (err, trip) => {
       if (err) {
         return next('Error in dbController.addTrip: ' + JSON.stringify(err));
       } else {
@@ -72,7 +76,11 @@ dbController.deleteTrip = async (req, res, next) => {
   const userID = req.params.userID;
   const objID = req.params.objectID;
 
-  models.findOneAndUpdate({username: userID}, {$pull: {trips: {_id: objID}}}, {new: true},(err, doc) => {
+  models.findOneAndUpdate(
+    { username: userID },
+    { $pull: { trips: { _id: objID } } },
+    { new: true },
+    (err, doc) => {
       if (err) {
         return next('Error in dbController.deleteTrip: ' + JSON.stringify(err));
       } else {
