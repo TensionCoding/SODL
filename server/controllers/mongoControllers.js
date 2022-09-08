@@ -40,7 +40,7 @@ dbController.getTrips = (req, res, next) => {
   console.log('In middleware getTrips');
   const userID = req.params.id;
   //const username = 'Test4'
-  models.findOne({username: userID}, (err, doc) => {
+  models.findOne({ username: userID }, (err, doc) => {
     if (err) {
       //database error
       return next('Error in dbController.getTrips: ' + JSON.stringify(err));

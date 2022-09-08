@@ -15,9 +15,16 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'http://192.168.1.4:8080' }),
   endpoints: builder => ({
     fetchUsers: builder.query({
-      query: () => '/api',
+      query: username => `/getTrips/${username}`,
+    }),
+    loginUser: builder.mutation({
+      query: loginInfo => ({
+        url: '/login',
+        method: 'POST',
+        body: loginInfo,
+      }),
     }),
   }),
 });
 
-export const { useFetchUsersQuery } = apiSlice;
+export const { useFetchUsersQuery, useLoginUserMutation } = apiSlice;

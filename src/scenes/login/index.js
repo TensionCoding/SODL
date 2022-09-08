@@ -9,10 +9,10 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-// import Logo from '../../assets/images/ADD.png';
+import Logo from '../../assets/images/ADD.png';
 import { fetchUsers, selectAllUsers } from '../../redux/reducers/usersSlice';
 import { HelloWorld } from '../../components/atoms';
-// import { useGetTripsQuery } from '../../redux/api/apiSlice';
+import { useLoginUserMutation } from '../../redux/api/apiSlice';
 
 const Login = () => {
   const { height } = useWindowDimensions();

@@ -1,33 +1,33 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-// const apiRouter = require('./server/routes/api');
+const apiRouter = require('./routes/api');
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded());
 
 //adding these for experiment
-const models = require('./db.config');
-const mongoose = require('mongoose');
+// const models = require('./db.config');
+// const mongoose = require('mongoose');
 
-app.use('/api', (req, res) => {
-  console.log('In middleware getTrips');
-  // const userID = req.params.id;
-  const userID = 'Test4';
-  //const username = 'Test4'
-  models.findOne({ username: userID }, (err, doc) => {
-    if (err) {
-      //database error
-      return res.send('Error in dbController.getTrips: ' + JSON.stringify(err));
-    } else {
-      console.log('here is the response-->', doc);
-      // res.locals.trips = doc.trips;
-      return res.status(200).json(doc.trips);
-    }
-  });
-});
+// app.use('/api', (req, res) => {
+//   console.log('In middleware getTrips');
+//   // const userID = req.params.id;
+//   const userID = 'Test4';
+//   //const username = 'Test4'
+//   models.findOne({ username: userID }, (err, doc) => {
+//     if (err) {
+//       //database error
+//       return res.send('Error in dbController.getTrips: ' + JSON.stringify(err));
+//     } else {
+//       console.log('here is the response-->', doc);
+//       // res.locals.trips = doc.trips;
+//       return res.status(200).json(doc.trips);
+//     }
+//   });
+// });
 
-// app.use('/', apiRouter);
+app.use('/', apiRouter);
 
 app.use('*', (req, res) => res.sendStatus(404));
 

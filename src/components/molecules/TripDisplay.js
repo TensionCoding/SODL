@@ -15,7 +15,7 @@ const TripDisplay = () => {
     isSuccess,
     isError,
     error,
-  } = useFetchUsersQuery();
+  } = useFetchUsersQuery('Test4');
 
   let content;
 
