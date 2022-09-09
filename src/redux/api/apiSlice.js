@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { IP_ADDRESS } from '@env';
 
 // export const apiSlice = createApi({
 //   reducerPath: 'api',
@@ -12,10 +13,12 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://192.168.1.4:8080' }),
+  baseQuery: fetchBaseQuery({ baseUrl: `http://${IP_ADDRESS}:8080` }),
+  tagTypes: ['Trips'],
   endpoints: builder => ({
     fetchUsers: builder.query({
       query: username => `/getTrips/${username}`,
+      providesTags: ['Trips'],
     }),
     loginUser: builder.mutation({
       query: loginInfo => ({
@@ -24,7 +27,27 @@ export const apiSlice = createApi({
         body: loginInfo,
       }),
     }),
+    signUpUser: builder.mutation({
+      query: userInfo => ({
+        url: '/createUser',
+        method: 'POST',
+        body: userInfo,
+      }),
+    }),
+    deleteTrip: builder.mutation({
+      query: tripInfo => ({
+        url: '/deleteTrip',
+        method: 'DELETE',
+        body: tripInfo,
+      }),
+      invalidatesTags: ['Trips'],
+    }),
   }),
 });
 
-export const { useFetchUsersQuery, useLoginUserMutation } = apiSlice;
+export const {
+  useFetchUsersQuery,
+  useLoginUserMutation,
+  useSignUpUserMutation,
+  useDeleteTripMutation,
+} = apiSlice;

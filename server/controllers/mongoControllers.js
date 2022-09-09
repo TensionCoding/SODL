@@ -71,14 +71,16 @@ dbController.addTrip = (req, res, next) => {
 
 dbController.deleteTrip = async (req, res, next) => {
   console.log('In middleware deleteTrip');
-  console.log('req.params-->', req.params);
+  // console.log('req.params-->', req.params);
+  const { username, tripId } = req.body;
+  console.log('username -->', username, 'tripId--->', tripId);
   //const objID = req.params;
-  const userID = req.params.userID;
-  const objID = req.params.objectID;
+  // const userID = req.params.userID;
+  // const objID = req.params.objectID;
 
   models.findOneAndUpdate(
-    { username: userID },
-    { $pull: { trips: { _id: objID } } },
+    { username: username },
+    { $pull: { trips: { _id: tripId } } },
     { new: true },
     (err, doc) => {
       if (err) {

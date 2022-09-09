@@ -15,11 +15,15 @@ router.patch('/addTrip/:id', dbController.addTrip, (req, res) => {
   console.log('made into addTrip PATCH request in router');
   res.status(200).json(res.locals.addedTrip);
 });
-router.delete(
-  '/deleteTrip/:objectID-:userID',
-  dbController.deleteTrip,
-  (req, res) => {
-    res.status(200).json(res.locals.newLog);
-  }
-);
+// router.delete(
+//   '/deleteTrip/:objectID-:userID',
+//   dbController.deleteTrip,
+//   (req, res) => {
+//     res.status(200).json(res.locals.newLog);
+//   }
+// );
+router.delete('/deleteTrip/', dbController.deleteTrip, (req, res) => {
+  res.status(200).json(res.locals.newLog);
+});
+
 module.exports = router;

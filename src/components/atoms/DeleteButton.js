@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, Pressable } from 'react-native';
 
-const CustomButton = ({ onPress, text }) => {
+const DeleteButton = ({ onPress }) => {
   return (
     <Pressable onPress={onPress} style={styles.container}>
-      <Text style={styles.text}>{text}</Text>
+      <Text style={styles.text}>Delete</Text>
     </Pressable>
   );
 };
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
-export default CustomButton;
+export default DeleteButton;

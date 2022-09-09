@@ -1,27 +1,29 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet,
   View,
+  Text,
   SafeAreaView,
+  StyleSheet,
   Image,
   useWindowDimensions,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { useLoginUserMutation } from '../../redux/api/apiSlice';
+import { useSignUpUserMutation } from '../../redux/api/apiSlice';
 import { applyUser } from '../../redux/reducers/userSlice';
 
 import Logo from '../../assets/images/ADD.png';
 import CustomButton from '../../components/atoms/CustomButton';
 import CustomInput from '../../components/atoms/CustomInput';
 
-const LoginPage = ({ navigation }) => {
+const SignUp = ({ navigation }) => {
   const { height } = useWindowDimensions();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  //Needs to be changed for Create User
 
   const dispatch = useDispatch();
 
-  const [login, { isLoading }] = useLoginUserMutation();
+  const [signUp, { isLoading }] = useSignUpUserMutation();
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -31,6 +33,7 @@ const LoginPage = ({ navigation }) => {
           style={[styles.logo, { height: height * 0.3 }]}
           resizeMode="contain"
         />
+        <Text style={styles.text}>Sign Up</Text>
         <CustomInput
           placeholder="Username"
           value={username}
@@ -43,33 +46,29 @@ const LoginPage = ({ navigation }) => {
           secureTextEntry={true}
         />
         <CustomButton
-          text={'Login'}
+          text={'Sign Up'}
           onPress={async () => {
             try {
-              const user = await login({
+              const user = await signUp({
                 username: username,
                 password: password,
               }).unwrap();
-              if (user === 'true') {
+              console.log('user in Sign Up Page-->', user);
+              if (/* I NEED A BETTER CONDITION*/ user) {
                 dispatch(applyUser(username));
                 return navigation.navigate('Home');
               } else {
-                console.log('did not return true-->', user);
-                return navigation.navigate('Sign Up');
+                console.log('NOT GOOD!!!');
               }
             } catch {
               console.log('an error has occurred !!!!!');
             }
           }}
         />
-        {/* <GooglePlacesInput/> */}
-        {/* <Button title='Go To Details'
-          onPress={()=> navigation.navigate('Home')} /> */}
       </View>
     </SafeAreaView>
   );
 };
-
 const styles = StyleSheet.create({
   safe: {
     flex: 1,
@@ -78,6 +77,9 @@ const styles = StyleSheet.create({
   root: {
     alignItems: 'center',
     padding: 20,
+  },
+  text: {
+    color: 'red',
   },
   logo: {
     //   width: 700,
@@ -89,4 +91,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginPage;
+export default SignUp;

@@ -1,10 +1,11 @@
 import React from 'react';
-import Home from '_scenes/home/index.js';
+import Home from './scenes/home/index';
 import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { store } from './redux/store';
 import LoginPage from './scenes/login/LoginPage';
+import SignUp from './scenes/signup/index';
 import Experiment from './scenes/experiment/experiment';
 // import Navigator from '_navigations';
 
@@ -16,7 +17,8 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login Page">
           <Stack.Screen name="Login Page" component={LoginPage} />
-          <Stack.Screen name="Experiment" component={Experiment} />
+          <Stack.Screen name="Sign Up" component={SignUp} />
+          <Stack.Screen name="Home" component={Home} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

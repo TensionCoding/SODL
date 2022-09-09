@@ -6,16 +6,28 @@ import {
   View,
   ActivityIndicator,
 } from 'react-native';
-import { useFetchUsersQuery } from '../../redux/api/apiSlice';
+import { useSelector } from 'react-redux';
+import {
+  useFetchUsersQuery,
+  useDeleteTripMutation,
+} from '../../redux/api/apiSlice';
+import { selectUser } from '../../redux/reducers/userSlice';
+import CustomButton from '../atoms/CustomButton';
 
 const TripDisplay = () => {
+  const currentUser = useSelector(selectUser);
+  // console.log('currentUser-->', currentUser.user);
+
   const {
     data: users,
     isLoading,
     isSuccess,
     isError,
     error,
-  } = useFetchUsersQuery('Test4');
+  } = useFetchUsersQuery(currentUser);
+
+  const [deleteTrip] = useDeleteTripMutation();
+  console.log('deleteTrip-->', deleteTrip);
 
   let content;
 
@@ -30,7 +42,21 @@ const TripDisplay = () => {
           <Text style={styles.text}>Time: {user.time}</Text>
           <Text style={styles.text}>Odometer: {user.odo}</Text>
           <Text style={styles.text}>Destination: {user.start}</Text>
-          <Button value={user._id} title={'Delete'} />
+          <CustomButton
+            text={'Delete'}
+            onPress={async () => {
+              /* SERIOUS BUG WHERE TRIPS ARE DELETED IS A USER SCROLLS */
+              try {
+                const trip = await deleteTrip({
+                  username: currentUser,
+                  tripId: user._id,
+                }).unwrap();
+                console.log('in Delete in Button-->', trip);
+              } catch {
+                console.log('an error has occured in Delete');
+              }
+            }}
+          />
         </View>
       );
     });
