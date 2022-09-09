@@ -60,8 +60,8 @@ const SignUp = ({ navigation }) => {
               } else {
                 console.log('NOT GOOD!!!');
               }
-            } catch {
-              console.log('an error has occurred !!!!!');
+            } catch (error) {
+              console.log('an error has occurred !!!!!', error);
             }
           }}
         />

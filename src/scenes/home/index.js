@@ -1,21 +1,16 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  ActivityIndicator,
-  Button,
-  ScrollView,
-} from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/reducers/userSlice';
 import TripDisplay from '../../components/molecules/TripDisplay';
+import AddTrip from '../../components/molecules/AddTrip';
 
 const Home = ({ navigation }) => {
   const user = useSelector(selectUser);
   console.log('here is the user from Login-->', user);
   return (
     <ScrollView style={styles.container}>
+      <AddTrip />
       <TripDisplay />
     </ScrollView>
   );

@@ -6,7 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { store } from './redux/store';
 import LoginPage from './scenes/login/LoginPage';
 import SignUp from './scenes/signup/index';
-import Experiment from './scenes/experiment/experiment';
+// import Experiment from './scenes/experiment/experiment';
 // import Navigator from '_navigations';
 
 const Stack = createNativeStackNavigator();

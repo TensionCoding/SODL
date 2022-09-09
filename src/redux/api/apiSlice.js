@@ -42,6 +42,14 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Trips'],
     }),
+    addTrip: builder.mutation({
+      query: tripInfo => ({
+        url: '/addTrip',
+        method: 'PATCH',
+        body: tripInfo,
+      }),
+      invalidatesTags: ['Trips'],
+    }),
   }),
 });
 
@@ -50,4 +58,5 @@ export const {
   useLoginUserMutation,
   useSignUpUserMutation,
   useDeleteTripMutation,
+  useAddTripMutation,
 } = apiSlice;

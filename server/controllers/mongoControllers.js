@@ -53,9 +53,16 @@ dbController.getTrips = (req, res, next) => {
 
 dbController.addTrip = (req, res, next) => {
   const newTrip = req.body;
-  const userID = req.params.id;
+  const { username } = newTrip;
+  console.log(
+    'here is newTrip from req.body-->',
+    newTrip,
+    'here is userId from newTrip-->',
+    username,
+  );
+  // const userID = req.params.id;
   models.findOneAndUpdate(
-    { username: userID },
+    { username: username },
     { $push: { trips: newTrip } },
     { new: true },
     (err, trip) => {

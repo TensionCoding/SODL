@@ -1,14 +1,6 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  ActivityIndicator,
-  Button,
-  ScrollView,
-} from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import { useSelector } from 'react-redux';
-import { useFetchUsersQuery } from '../../redux/api/apiSlice';
 import { selectUser } from '../../redux/reducers/userSlice';
 import TripDisplay from '../../components/molecules/TripDisplay';
 
