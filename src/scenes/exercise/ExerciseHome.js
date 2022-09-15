@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { FlatList, StyleSheet, RefreshControl } from 'react-native';
-import { COLOR_PALETTES } from './colors';
+import { FlatList, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import ColorDisplay from './ColorDisplay';
 
-const ExerciseHome = ({ navigation }) => {
+const ExerciseHome = ({ navigation, route }) => {
+  const newColorPalette = route.params
+    ? route.params.newColorPalette
+    : undefined;
   const [colorPalettes, setColors] = useState([]);
   const [isRefreshing, setIsRefresh] = useState(false);
 
@@ -19,12 +21,20 @@ const ExerciseHome = ({ navigation }) => {
 
   useEffect(() => {
     handleFetchPalettes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (newColorPalette) {
+      setColors(palette => [newColorPalette, ...palette]);
+    }
+  }, [newColorPalette]);
 
   const handleRefresh = useCallback(async () => {
     setIsRefresh(true);
     await handleFetchPalettes();
     setIsRefresh(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -42,6 +52,14 @@ const ExerciseHome = ({ navigation }) => {
       )}
       refreshing={isRefreshing}
       onRefresh={handleRefresh}
+      ListHeaderComponent={
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('ColorPaletteModal');
+          }}>
+          <Text style={styles.text}>Add a color scheme</Text>
+        </TouchableOpacity>
+      }
       // refreshControl={<RefreshControl refreshing={true} onRefresh={() => {}} />}
     />
   );
@@ -51,6 +69,12 @@ const styles = StyleSheet.create({
   list: {
     padding: 10,
     backgroundColor: 'white',
+  },
+  text: {
+    fontWeight: 'bold',
+    color: 'teal',
+    fontSize: 20,
+    marginBottom: 10,
   },
 });
 
