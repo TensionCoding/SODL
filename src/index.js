@@ -22,7 +22,11 @@ const App = () => {
           <Stack.Screen name="Sign Up" component={SignUp} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Exercise" component={ExerciseHome} />
-          <Stack.Screen name="ColorPalette" component={ColorPalette} />
+          <Stack.Screen
+            name="ColorPalette"
+            component={ColorPalette}
+            options={({ route }) => ({ title: route.params.paletteName })}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
